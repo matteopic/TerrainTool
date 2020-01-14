@@ -1,0 +1,13 @@
+---
+# build manifest for SourceHut
+# https://man.sr.ht/builds.sr.ht/
+image: ubuntu/lts
+packages:
+- openjdk-8-jdk-headless
+- maven
+- default-jre
+sources:
+- https://git.sr.ht/~kravietz/TerrainTool
+tasks:
+- build: |
+    mvn package
