@@ -55,6 +55,7 @@ public class ASTERReader extends DEMReader {
         }
     private static final boolean downloadable = false;
     private static final int recordlength = 3601;
+    // For example: ASTGTMV003_N43E043.zip
     private static final String legacyfilenameformat = "ASTGTM_%1s%02d%1s%03d";
     private static final String filenameformat = "ASTGTM2_%1s%02d%1s%03d";
     private static final String name = "Advanced Spaceborne Thermal Emission and Reflection Radiometer (ASTER)  Version 2";
