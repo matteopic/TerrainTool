@@ -1,3 +1,5 @@
+[![builds.sr.ht status](https://builds.sr.ht/~kravietz/TerrainTool/ubuntu.yml.svg)](https://builds.sr.ht/~kravietz/TerrainTool/ubuntu.yml?)
+
 # TerrainTool - create surface topographic data for Survex and Therion
 
 TerrainTool is used to create surface topographic data for the cave survey packages [Survex](http://survex.com) and [Therion](http://therion.speleo.sk).
