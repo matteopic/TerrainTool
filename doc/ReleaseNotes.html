@@ -1,0 +1,68 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>TerrainTool Release Notes</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    </head>
+    <body>
+		<h1>Version 1.13</h1>
+		<h3>HTTPS Support</h3>
+		<p>	Sometime prior to July 2017, changes were made to the USGS webserver that force the use of an encrypted HTTPS connection
+			in place of HTTP to download the SRTM tiles. Version 1.13 adds support for HTTPS using Transport Layer Security (TLS) version 1.2. 
+			The USGS server does not seem to accept earlier versions of TLS. </p>
+		<h3>Java Version</h3>
+		<p>	Previous versions of TerrainTool were built using Java 6 because this was the highest version supported on Mac OS X at the time (2010). However,
+			Java 6 does not support TLS1.2, forcing TerrainTool 1.13 to be built on Java 7. Oracle provide downloads for both Java 7 and 
+			Java 8 for OS X but be aware that there may be compatibility issues with legacy Mac systems.<b>I'm keen to hear from Mac users 
+			about whether their systems support Java 7 or Java 8 because it would clearly be better for everyone if I could upgrade TerrainTool 
+			to be build on the latest and most secure version of Java.</b></p>
+        <h1>Version 1.12a</h1>
+        <h3>ASTER 2</h3>
+        <p>This version bring support for the ASTER-2 dataset that has recently become available. This 
+            has the same resolution as the original ASTER data but the processing has resulted in fewer artefacts. Internally,
+            the data format is the same as before but the filename e.g. ASTGTM2_N51W003.zip now includes a "2" to indicate that it 
+            is from the ASTER-2 dataset. Note: you can't just read the file and read it as though it came from the original 
+            ASTER dataset because the files inside the outer zip "wrapper" also have a "2" added to their names.</p>
+        <h3>File Locations</h3>
+        <p>Previous versions of TerrainTool running under Windows placed the terraintool.properties and data directory 
+            in the same directory as terraintool.jar. Under unix-family operating systems, (e.g. Ubuntu, Debian) these
+            files were created in the current working directory, wherever that happened to be. If the current directory 
+            already contained a sub-directory called "data", terrain data files were just added to it. This sometimes resulted 
+            in terrain data being added to unrelated data directories and, potentially, duplication of data.</p>
+        <p>
+            The sections below explain where the data files and properties file will be located, according to whether you
+            have the cross-platform version (default) or used an application installer under Ubuntu or Debian. If you already have
+            data that has been downloaded from the SRTM or ASTER sites, you may want to copy these into the new data directory to 
+            avoid having to download them again.
+        </p>
+        <h4>Cross-platform version</h4>
+        <p>
+            If you downloaded TerrainTool as a "jar" file from the UBSS web site, you have the cross-platform version which is 
+            built to run under Windows, Unix family (Ubuntu, Debian, Solaris etc.) and OS X.
+            By default, this version of TerrainTool creates the terraintool.properties and the data store in the 
+            .terraintool sub-directory of the user's home directory. For recent Windows versions, this would be something 
+            like c:\users\Mike\.terraintool or /home/mike/.terraintool on Ubuntu. Note that normally, Unix-family operating 
+            systems treat directories starting with "." as hidden - hence the sub-directory may not be visible.
+        <h4>Unix-specific Version</h4>
+        <p>
+            Apart from downloading terraintool.jar from the UBSS web site, TerrainTool can also be installed as a
+            pre-packaged application for Ubuntu and Debian (thanks to Wookey!). This is identical to the cross-platform
+            version, except that the properties file and data directory are placed in a more unix-friendly location, as follows:-
+        </p>
+        <ul>
+            <li>If $XDG_CONFIG_HOME is set, terraintool.properties goes in $XDG_CONFIG_HOME/terraintool/. Otherwise, it goes
+            in $HOME/.config/terraintool/ 
+            </li>
+            <li>
+                if $XDG_DATA_HOME is set, the data directory is $XDG_DATA_HOME/terraintool/ Otherwise it is $HOME/.local/share/terraintool/ 
+            </li>
+        </ul>
+        <h4>Customisation</h4>
+        <p>
+            If building TerrainTool from source-code, the file locations are easily customised by changing a single 
+            line of TerrainFrame.java and writing a class to implement the Pathnames interface. See Pathnames.java.
+        </p>
+    </body>
+</html>
