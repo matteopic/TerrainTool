@@ -281,6 +281,10 @@ of voids in the finished product.
 By default, version 1.11 onwards of TerrainTool assumes ASTER data to be from the ASTER 2 dataset. This contains fewer artefacts than the 
 original ASTER dataset. However, if you need to use the original data files, select this option.
 
+#### NASADEM
+
+Use this option if you have downloaded and installed NASADEM files. See below for details.
+
 ## Installing ASTER data files
 
 Obtaining ASTER data is free and quite straightforward. The first step is that you will need to register at [NASA Earth Data](https://search.earthdata.nasa.gov/)
@@ -290,7 +294,13 @@ to refine results to ASTER files ("granules") only. You can then download ZIP fi
 When TerrainTool runs it will create a directory called `.terraintool` in your home directory. Place the original
 ZIP files in that directory (do _not_ unpack them).
 
+NASADEM works in the same way, use `NASADEM` as search term then download the zip file (e.g. NASADEM_HGT_n56e143.zip) 
+finally copy it into the `.terraintool` directory.
+
 A similar procedure can be used to install SRTM data files manually. Simply copy data tiles (e.g. N51W003.hgt.zip) into the "data" sub-directory.
+
+
+
 
 ## Author
 

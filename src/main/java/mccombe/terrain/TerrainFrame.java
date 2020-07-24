@@ -664,6 +664,7 @@ public class TerrainFrame extends javax.swing.JFrame {
      */
     public TerrainFrame() {
         initComponents();
+        setTitle("Terrain Tool");
 
         try {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
@@ -798,6 +799,10 @@ public class TerrainFrame extends javax.swing.JFrame {
                 reader = new SRTM2Reader(statusPanel); /////
                 srtmMenuItem.getModel().setSelected(true);
                 legacyMenuItem.setEnabled(false);
+            }else if (useASTER.equalsIgnoreCase("nasadem")) {
+                reader = new NASADEMReader(statusPanel); /////
+                nasaDemMenuItem.getModel().setSelected(true);
+                legacyMenuItem.setEnabled(false);
             }
             properties.set(TerrainProperties.ASTER, useASTER);
             legacyMenuItem.getModel().setSelected(useLegacyASTER.equalsIgnoreCase("true"));
@@ -875,6 +880,7 @@ public class TerrainFrame extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         srtmMenuItem = new javax.swing.JRadioButtonMenuItem();
         asterMenuItem = new javax.swing.JRadioButtonMenuItem();
+        nasaDemMenuItem = new javax.swing.JRadioButtonMenuItem();
         bothMenuItem = new javax.swing.JRadioButtonMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         legacyMenuItem = new javax.swing.JRadioButtonMenuItem();
@@ -1029,6 +1035,18 @@ public class TerrainFrame extends javax.swing.JFrame {
             }
         });
         optionsMenu.add(bothMenuItem);
+
+
+        datasourceGroup.add(nasaDemMenuItem);
+        nasaDemMenuItem.setText("NASADEM");
+        nasaDemMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nasaDemMenuItemActionPerformed(evt);
+            }
+        });
+        optionsMenu.add(nasaDemMenuItem);
+
+
         optionsMenu.add(jSeparator2);
 
         legacyMenuItem.setText("Legacy ASTER Data");
@@ -1112,6 +1130,9 @@ public class TerrainFrame extends javax.swing.JFrame {
                 } else if (properties.get(TerrainProperties.ASTER).equalsIgnoreCase("srtm")) {
                     reader = new SRTM2Reader(statusPanel); /////
                     containsASTER = false;
+                } else if (properties.get(TerrainProperties.ASTER).equalsIgnoreCase("nasadem")) {
+                    reader = new NASADEMReader(statusPanel);
+                    containsASTER = false;
                 }
                 String leg = properties.get(TerrainProperties.LEGACYASTER);
                 boolean v1 = leg.equalsIgnoreCase("true");
@@ -1168,7 +1189,7 @@ public class TerrainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_coordMenuItemActionPerformed
 
     private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemActionPerformed
-        int result = chooser.showOpenDialog(mainFrame);
+        int result = chooser.showSaveDialog(mainFrame);
         if (result == javax.swing.JFileChooser.APPROVE_OPTION) {
             Saver worker = new Saver();
             PropertyChangeListener[] listeners = statusPanel.getPropertyChangeListeners();
@@ -1264,6 +1285,14 @@ public class TerrainFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_asterMenuItemActionPerformed
+
+    private void nasaDemMenuItemActionPerformed(ActionEvent evt) {
+        if (nasaDemMenuItem.getModel().isSelected()) {
+            properties.set(TerrainProperties.ASTER, "nasa-dem");
+            autoDownloadMenuItem.setEnabled(false);
+            legacyMenuItem.setEnabled(false);
+        }
+    }
 
     private void bothMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bothMenuItemActionPerformed
         if (bothMenuItem.getModel().isSelected()) {
@@ -1700,6 +1729,7 @@ public class TerrainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JRadioButtonMenuItem asterMenuItem;
+    private javax.swing.JRadioButtonMenuItem nasaDemMenuItem;
     private javax.swing.JCheckBoxMenuItem autoDownloadMenuItem;
     private javax.swing.JRadioButtonMenuItem bothMenuItem;
     private javax.swing.JMenuItem coordMenuItem;
