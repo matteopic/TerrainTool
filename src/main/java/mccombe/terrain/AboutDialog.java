@@ -43,7 +43,7 @@ public class AboutDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mccombe/terrain/images/About.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/About.png"))); // NOI18N
 
         jButton1.setText("Close");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
